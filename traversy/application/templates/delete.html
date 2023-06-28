@@ -1,0 +1,13 @@
+{% extends 'layout.html'%}
+
+{% block content %}
+
+<div>
+  <form method="POST" action="">
+    {% csrf_token %}
+    <p>Are you Sure to delete {{ data }}</p>
+    <input type="submit" value="Confirm"/>
+  </h1>
+</div>
+
+{% endblock %}

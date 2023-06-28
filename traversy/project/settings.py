@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+from django.core.management.commands.runserver import Command as runserver
+runserver.default_port = "4000"
+
 
 # Application definition
 
