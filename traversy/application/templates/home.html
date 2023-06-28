@@ -7,7 +7,8 @@
 <div>
   <div>
     {% for room in data %}
-      <h3>{{room.id}} - {{ room.name }}</h3>
+      <h3><a href="/app/{{ room.id }}">{{room.id}} - {{ room.name }}</a></h3>
+      <h4><a href="{% url 'room' room.id %}">{{room.id}} - {{ room.name }}</a></h4>
     {% endfor %}
   </div>
 </div>
