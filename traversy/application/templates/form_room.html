@@ -1,0 +1,17 @@
+{% extends 'layout.html'%}
+
+{% block content %}
+
+<h1>Room form</h1>
+
+<div>
+  <form method="POST" action="">
+    {% csrf_token %}
+    <h3>Room topic: {{ data.topic.name }}</h3>
+    <label>Room name:</label>
+    <input type="text" name="name" value="{{ data.name }}"/>
+    <input type="submit" />
+  </form>
+</div>
+
+{% endblock %}

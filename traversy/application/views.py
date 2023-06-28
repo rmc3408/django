@@ -35,3 +35,9 @@ def room(request, id):
 
     return render(request, 'room.html', { 'data': room })
 
+
+def form(request, id):
+    room = Room.objects.get(id=id)
+
+    context = { 'data': room }
+    return render(request, 'form_room.html', context )

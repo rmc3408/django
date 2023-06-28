@@ -7,12 +7,15 @@
 <div>
   <div>
     {% for room in data %}
-    <span>@{{room.host.username}}</span>
-    <!-- <h3><a href="/app/{{ room.id }}">{{room.id}} - {{ room.name }}</a></h3> -->
-    <h2><a href="{% url 'room' room.id %}">{{room.id}} - {{ room.name }}</a></h2>
-    <span>-> {{room.topic.name}}</span>
+      <span>@{{room.host.username}}</span>
+      
+      <h2><a href="{% url 'room' room.id %}">{{ room.id }} - {{ room.name }}</a></h2>
+      <a href="{% url 'edit' room.id %}">EDIT</a>
+      <span>-> {{room.topic.name}}</span>
     {% endfor %}
   </div>
 </div>
 
 {% endblock %}
+
+<!-- <h3><a href="/app/{{ room.id }}">{{room.id}} - {{ room.name }}</a></h3> -->
