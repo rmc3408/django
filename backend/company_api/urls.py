@@ -1,6 +1,7 @@
 from django.urls import path
-from django.views.generic import TemplateView
+from .views import CompanyDetail, CompanyList
 
 urlpatterns = [
-    #path("", include()),
+    path("<int:pk>", CompanyDetail.as_view(), name='update_create'),
+    path("", CompanyList.as_view(), name='list'),
 ]
