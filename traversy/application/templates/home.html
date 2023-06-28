@@ -1,5 +1,5 @@
 {% extends 'layout.html'%}
-  
+
 {% block content %}
 
 <h1>Home Page</h1>
@@ -7,11 +7,12 @@
 <div>
   <div>
     {% for room in data %}
-      <h3><a href="/app/{{ room.id }}">{{room.id}} - {{ room.name }}</a></h3>
-      <h4><a href="{% url 'room' room.id %}">{{room.id}} - {{ room.name }}</a></h4>
+    <span>@{{room.host.username}}</span>
+    <!-- <h3><a href="/app/{{ room.id }}">{{room.id}} - {{ room.name }}</a></h3> -->
+    <h2><a href="{% url 'room' room.id %}">{{room.id}} - {{ room.name }}</a></h2>
+    <span>-> {{room.topic.name}}</span>
     {% endfor %}
   </div>
 </div>
 
 {% endblock %}
-

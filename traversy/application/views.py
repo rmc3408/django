@@ -18,7 +18,9 @@ def home(request):
     # return render(request, 'home.html', { 'data': mockRooms })
     
     rooms = Room.objects.all()
-    
+    # for i in rooms:
+    #     print(model_to_dict(i))
+
     context = { 'data': rooms }
     return render(request, 'home.html', context)
 
@@ -27,9 +29,8 @@ def room(request, id):
     # return render(request, 'room.html', { 'data': mockRooms[int(id)] })
     
     room = Room.objects.get(id=id)
-    
-    #print(room.__dict__)
     #pprint.pprint(room.__dict__, indent = 4)
+    #print(room.__dict__)
     #print(model_to_dict(room))
 
     return render(request, 'room.html', { 'data': room })
