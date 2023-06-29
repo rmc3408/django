@@ -13,7 +13,7 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
     },
     {
-        path: '/notes/:id',
+        path: '/:id',
         element: <NotePage />,
     },
 ])

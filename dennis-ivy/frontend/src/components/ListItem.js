@@ -27,7 +27,7 @@ let getContent = (note) => {
 
 const ListItem = ({ note }) => {
     return (
-        <Link to={`notes/${note.id}`}>
+        <Link to={`/${note.id}`}>
             <div className='notes-list-item'>
                 <h3>{getTitle(note)}</h3>
                 <p>

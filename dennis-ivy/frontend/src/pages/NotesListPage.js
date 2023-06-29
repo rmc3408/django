@@ -12,7 +12,7 @@ const NotesListPage = () => {
     }, [])
 
     let getNotes = async () => {
-        let response = await fetch(BASE_URL+'/notes')
+        let response = await fetch(BASE_URL + '/notes')
         let data = await response.json()
         setNotes(data)
     }
