@@ -4,6 +4,13 @@
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li><a href="{% url 'home' %}">Home</a></li>
       <li><a href="{% url 'create' %}">Create</a></li>
+      
+      {% if request.user.is_authenticated %}
+      <li><a href="{% url 'logout' %}">LogOut</a></li>
+      {% else %} 
+      <li><a href="{% url 'login' %}">LogIn</a></li>
+      {% endif %}
+      
     </ul>
     <form class="right hide-on-med-and-down" method="GET" action="{% url 'home' %}">
       <div class="input-field">
