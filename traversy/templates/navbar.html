@@ -1,3 +1,16 @@
-<a href="{% url 'home' %}">
-  <h2>HOME</h2>
-</a>
+<nav>
+  <div class="nav-wrapper">
+    <a href="{% url 'home' %}" class="brand-logo">Logo</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="{% url 'home' %}">Home</a></li>
+      <li><a href="{% url 'create' %}">Create</a></li>
+    </ul>
+    <form class="right hide-on-med-and-down" method="GET" action="{% url 'home' %}">
+      <div class="input-field">
+        <input name="q" id="search" type="search" placeholder="Searching for rooms..." />
+        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+        <i class="material-icons">close</i>
+      </div>
+    </form>
+  </div>
+</nav>

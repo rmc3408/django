@@ -1,5 +1,6 @@
 {% extends 'layout.html'%}
 
+
 {% block content %}
 
 <h1>Room form</h1>
@@ -7,7 +8,7 @@
 <div>
   <form method="POST" action="">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form }}
     <input type="submit" />
   </form>
 </div>

@@ -2,21 +2,36 @@
 
 {% block content %}
 
-<h1>Home Page</h1>
-<hr />
 
-<div>
-  <br />
-  <a href="{% url 'create'%}"><h1>Create a room</h1></a>
-  <div>
+<div class="row">
+  <div class="col s3">
+    <h3>browse topics</h3>
+    <div class="divider"></div>
+    
+    <div>
+      <a href="{% url 'home' %}">All</a>
+    </div>
+    {% for topic in topics %}
+      <div>
+        <a href="{% url 'home' %}?q={{ topic.name }}">{{topic.name}}</a>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="col s9">
+    <a href="{% url 'create'%}" class="waves-effect waves-light btn-large red">
+      <i class="material-icons left">add</i>Create a room
+    </a>
+    <h5>{{totalRooms}} rooms avaliable</h5>
     {% for room in data %}
-      <br /> 
+    <div class="section">
       <p>@{{room.host.username}}</p>
-      <h2><a href="{% url 'room' room.id %}">{{ room.id }} - {{ room.name }}</a></h2>
+      <h3><a href="{% url 'room' room.id %}">{{ room.id }} - {{ room.name }}</a></h3>
       <span><a href="{% url 'edit' room.id %}">EDIT</a></span>
       <span><a href="{% url 'delete' room.id %}">DELETE</a></span>
       <p>TOPIC({{room.topic.name}})</p>
-      <br /> 
+      <div class="divider"></div>
+    </div>
     {% endfor %}
   </div>
 </div>

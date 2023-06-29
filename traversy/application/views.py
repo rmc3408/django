@@ -1,38 +1,29 @@
 from django.shortcuts import render, redirect
 # from django.http import HttpResponse
-from .models import Room
+from django.db.models import Q
+from .models import Room, Topic
 from .forms import RoomForm
 import pprint
 from django.forms.models import model_to_dict
 
 
-# mockRooms = [
-#     { 'id': 0, 'name': 'python'},
-#     { 'id': 1, 'name': 'node'},
-#     { 'id': 2, 'name': 'java'},
-# ]
-
-
 def home(request):
-    # return HttpResponse('Home page')
-    # return render(request, 'home.html', { 'data': mockRooms })
+  
+    queryURL = request.GET.get('q') if (request.GET.get('q') != None) else ''
     
-    rooms = Room.objects.all()
-    # for i in rooms:
-    #     print(model_to_dict(i))
+    rooms = Room.objects.filter(
+        Q(topic__name__icontains=queryURL) |
+        Q(name__icontains=queryURL) |
+        Q(description__icontains=queryURL)
+        )
+    topics = Topic.objects.all()
 
-    context = { 'data': rooms }
+    context = { 'data': rooms, 'topics': topics, 'totalRooms': rooms.count() }
     return render(request, 'home.html', context)
 
 
-def room(request, id):
-    # return render(request, 'room.html', { 'data': mockRooms[int(id)] })
-    
+def room(request, id): 
     room = Room.objects.get(id=id)
-    #pprint.pprint(room.__dict__, indent = 4)
-    #print(room.__dict__)
-    #print(model_to_dict(room))
-
     return render(request, 'room.html', { 'data': room })
 
 
