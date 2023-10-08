@@ -2,7 +2,7 @@
 
 
 ## Academind - Python Django The Practical Guide - 23 hours length
-I stopped at section XX - video XX
+I stopped at section 03 - video XX
 https://www.udemy.com/course/python-django-the-practical-guide/
 
 
