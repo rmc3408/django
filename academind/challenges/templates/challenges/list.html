@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+
+  {% load static %}
+  {% block page_css %}
+    <link rel="stylesheet" href="{% static 'challenges/list.css' %}">
+  {% endblock %}
+
+  {% block page_title %}List of Challenges{% endblock %}
+
+  {% block content %}
+
+    {% include './partials/nav.html' %}
+
+    <div class="container my-5">
+      <div class="p-5 text-center bg-body-tertiary rounded-3 mb-5">
+        <h1 class="text-body-emphasis">List of months avaliable</h1>
+      </div>
+      
+      {% for singleMonth in months %}
+        <div class="list-group list-group-checkable d-grid gap-2 border-0">
+            <a href="{% url 'named-month' month=singleMonth %}" alt="{{singleMonth}}" class="links">
+              <label class="list-group-item rounded-3 py-3 my-2 links-focus">
+                {{ singleMonth|title }}
+                <span class="d-block small opacity-50">Description of task</span> 
+              </label>
+            </a>
+        </div>
+      {% endfor %}
+
+  </div>
+  {% endblock content %}

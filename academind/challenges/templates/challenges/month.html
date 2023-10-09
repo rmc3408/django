@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+
+  {% block page_title %}{{ month|title }}{% endblock %}
+
+  {% block content %}
+
+    {% include './partials/nav.html' with info=month %}
+
+    <div class="container my-5">
+      <div class="p-5 text-center bg-body-tertiary rounded-3">
+        <h1 class="text-body-emphasis">{{ month|title }} is your chosen month</h1>
+        {% if text is not None %}
+          <p class="lead">Your month has <code>{{ text }}</code> from your list of task</p>
+        {% else %}
+          <p class="lead">Your month has <code>NO TASK</code> from your list of task</p>
+        {% endif %}
+      </div>
+    </div>
+  {% endblock %}
