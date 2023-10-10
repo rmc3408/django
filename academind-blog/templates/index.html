@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+    
+    {% block css_files %}
+    {% endblock %}
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+  </head>
+  <body>
+    <header id="main-navigation">
+      <h1><a href="{% url 'home_page' %}">DIRTY BLOG</a></h1>
+      <nav>
+        <a href="{% url 'list_page' %}">All my dirty posts</a>
+      </nav>
+    </header>
+    {% block content %}
+
+    {% endblock %}
+  </body>
+</html>
