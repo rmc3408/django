@@ -1,0 +1,31 @@
+
+python manage.py makemigrations
+
+python manage.py migrate 
+
+python manage.py sqlmigrate book 0001
+
+```python manage.py shell```
+
+from book.models import Book, Category
+from django.utils import timezone
+import datetime
+
+d = datetime.datetime(2000, 2, 26, 13, 0, 0, 775217, tzinfo=datetime.timezone.utc)
+b1 = Book(title="Lord of Rings", rating=8, author="J.K.Roling", is_bestselling=True, pub_date=d)
+b1.save()
+
+Book.objects.create(title="Queen of Dammed", rating=10, author="Anne Rice", is_bestselling=True, pub_date=d)
+Category.objects.create(book_id=2, votes=254, type="horror")
+
+Book.objects.get(id=1)
+Book.objects.filter(rating__gt=3, title__icontains='ing')
+
+from django.db.models import Q
+Book.objects.filter(Q(rating__gt=3) | Q(title__icontains='ing'))
+Book.objects.filter(Q(rating__gt=3) & Q(title__icontains='ing'))
+
+Declaring only query, no reach database but keep in cache. it only reach when need real data, i.e. print()
+bestRabest = Book.objects.filter(is_bestselling=True)
+best_rate = Book.objects.filter(rating__gt=4)
+
