@@ -1,70 +1,36 @@
 from django.db import models
-from datetime import date
 
-all_posts = [
-    {
-        "slug": "hike-in-the-mountains",
-        "image": "mountains.jpg",
-        "author": "Maximilian",
-        "date": date(2021, 7, 21),
-        "title": "Mountain Hiking",
-        "excerpt": "There's nothing like the views you get when hiking in the mountains! And I wasn't even prepared for what happened whilst I was enjoying the view!",
-        "content": """
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
-          aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
-          velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
-
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
-          aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
-          velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
-
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
-          aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
-          velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
-        """
-    },
-    {
-        "slug": "programming-is-fun",
-        "image": "coding.jpg",
-        "author": "Maximilian",
-        "date": date(2022, 3, 10),
-        "title": "Programming Is Great!",
-        "excerpt": "Did you ever spend hours searching that one error in your code? Yep - that's what happened to me yesterday...",
-        "content": """
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
-          aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
-          velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
-
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
-          aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
-          velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
-
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
-          aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
-          velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
-        """
-    },
-    {
-        "slug": "into-the-woods",
-        "image": "woods.jpg",
-        "author": "Maximilian",
-        "date": date(2020, 8, 5),
-        "title": "Nature At Its Best",
-        "excerpt": "Nature is amazing! The amount of inspiration I get when walking in nature is incredible!",
-        "content": """
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
-          aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
-          velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
-
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
-          aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
-          velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
-
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
-          aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
-          velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
-        """
-    }
+all_posts = [    
 ]
 
-# Create your models here.
+
+class Tag(models.Model):
+  caption = models.CharField(max_length=20)
+
+  def __str__(self):
+    return self.caption
+  
+  def get_tags(self, obj):
+        return " / ".join([t.caption for t in obj.tag.all()])
+
+
+class Author(models.Model):
+  first_name = models.CharField(max_length=20)
+  last_name = models.CharField(max_length=20)
+  email = models.EmailField(max_length=100)
+
+  def __str__(self):
+    return f"{self.first_name} {self.last_name}"
+
+
+class Post(models.Model):
+  title = models.CharField(max_length=50)
+  excerpt = models.CharField(max_length=200)
+  content = models.TextField(blank=True)
+  image_name = models.CharField(max_length=20)
+  slug = models.SlugField(unique=True, db_index=True)
+  date = models.DateField(auto_now=True)
+  author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True, related_name='posts')
+  tag = models.ManyToManyField(Tag, null=True)
+
+

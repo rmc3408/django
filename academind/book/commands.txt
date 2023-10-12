@@ -7,25 +7,39 @@ python manage.py sqlmigrate book 0001
 
 ```python manage.py shell```
 
-from book.models import Book, Category
-from django.utils import timezone
-import datetime
 
+ONE TO ONE
+from book.models import Book, Category, Author, Address
+import datetime
 d = datetime.datetime(2000, 2, 26, 13, 0, 0, 775217, tzinfo=datetime.timezone.utc)
+a1 = Author.objects.create(first_name='Anne', last_name='Rice')
+c1 = Category.objects.create(type='Horror')
+b1 = Book.objects.create(title='Witch Hour', rating=3, is_bestselling=True, author=a1, category=c1, pub_date=d)
+
+CREATE A BOOK BUT SAVING AFTER
 b1 = Book(title="Lord of Rings", rating=8, author="J.K.Roling", is_bestselling=True, pub_date=d)
 b1.save()
 
-Book.objects.create(title="Queen of Dammed", rating=10, author="Anne Rice", is_bestselling=True, pub_date=d)
-Category.objects.create(book_id=2, votes=254, type="horror")
 
+GET ONE RESULT
 Book.objects.get(id=1)
+
+GET MULTIPLE RESULTS AS LIST
 Book.objects.filter(rating__gt=3, title__icontains='ing')
 
+FILTERING AND QUERY 
 from django.db.models import Q
 Book.objects.filter(Q(rating__gt=3) | Q(title__icontains='ing'))
 Book.objects.filter(Q(rating__gt=3) & Q(title__icontains='ing'))
 
-Declaring only query, no reach database but keep in cache. it only reach when need real data, i.e. print()
+QUERY NOT CALL DATABASE, ONLY WHEN GET RESULTS
 bestRabest = Book.objects.filter(is_bestselling=True)
 best_rate = Book.objects.filter(rating__gt=4)
+
+MANY TO MANY
+from book.models import Country, Book
+c1 = Country.objects.create(name='Germany', code='DE')
+b1 = Book.objects.all()[0]
+b1.published.add(c1)
+b1.save()
 
