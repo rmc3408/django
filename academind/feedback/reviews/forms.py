@@ -6,8 +6,8 @@ class ReviewForm(ModelForm):
     class Meta:
         model = Review
         fields = "__all__"
-        # exclude = ['owner_comment']
         # fields = ['user_name', 'email']
+        # exclude = ['rating']
         labels = {
             "user_name": "Your Name",
             "review_text": "Your Feedback",
@@ -18,6 +18,6 @@ class ReviewForm(ModelForm):
         }
         error_messages = {
             "user_name": {
-                "required": "and a mandatory field!!",
+                "required": "and a mandatory field !!",
             },
         }

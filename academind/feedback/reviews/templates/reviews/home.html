@@ -1,31 +1,27 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'reviews/styles.css' %}" />
-    <title>Reviews</title>
-  </head>
-  <body>
-    <h1>Review Form</h1>
-    <form method="post" action="/" novalidate>
-      {% csrf_token %}
-      {% for field in form %}
-        <div class="form-control {% if field.errors %}errors{% endif %}">
-          {{ field.label_tag }}
-          {{ field }}
-          {{ field.help_text|safe }}
-          {% for err in field.errors %}
-            {{ err }}
-          {% endfor %}
-        </div>
-      {% endfor %}
+{% extends 'reviews/index.html' %}
 
-      <button type="submit">Send</button>
-    </form>
-  </body>
-</html>
+{% block title %}
+  Review Form
+{% endblock %}
+
+{% block content %}
+  <h1>Form</h1>
+  <form method="post" action="/" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="form-control {% if field.errors %}{% endif %}">
+        {{ field.label_tag }}
+        {{ field }}
+        {{ field.help_text|safe }}
+        {% for err in field.errors %}
+          {{ err }}
+        {% endfor %}
+      </div>
+    {% endfor %}
+
+    <button type="submit">Send</button>
+  </form>
+{% endblock %}
 
 {% comment %}
 <form method="post" action="/">
