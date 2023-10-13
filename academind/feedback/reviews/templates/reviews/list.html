@@ -6,6 +6,7 @@
 
 {% block content %}
   <ul>
+    {% comment %} {% for review in object_list %} {% endcomment %}
     {% for review in reviews %}
       <li>{{ review.user_name }} - rating: {{ review.rating }}</li>
     {% endfor %}
