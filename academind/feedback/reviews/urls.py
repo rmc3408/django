@@ -8,5 +8,6 @@ urlpatterns = [
   path('', views.Home.as_view(), name='reviews-home'),
   path('thank', views.Thank.as_view(), name='reviews-thank'),
   path('reviews', views.List.as_view(), name='reviews-list'),
+  path('reviews/favorites', views.Favorite.as_view()),
   path('reviews/<str:user_name>', views.Detail.as_view(), name='reviews-detail'),
 ]
