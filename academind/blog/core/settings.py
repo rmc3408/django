@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from os import getenv
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -28,7 +29,7 @@ SECRET_KEY = 'te#*0dpu+bt8a(9ko9_xvs87-+li1b33bs$zca&f5xqo3z9l^'
 DEBUG = getenv('IS_DEVELOPMENT', True)
 
 ALLOWED_HOSTS = [
-  getenv('APP_HOST')
+  getenv('APP_HOST', '*')
 ]
 
 
