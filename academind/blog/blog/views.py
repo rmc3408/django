@@ -86,7 +86,7 @@ class Detail(DetailView):
         context['tags'] = detailed_post.tag.all()  # type: ignore
         context['comment_form'] = CommentForm()
         context['comments'] = detailed_post.comments.all()  # type: ignore
-        print(context)
+        # print(context)
         return context
 
     def post(self, request, slug):
